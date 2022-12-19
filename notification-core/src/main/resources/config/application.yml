@@ -1,0 +1,21 @@
+spring:
+  data:
+    mongodb:
+      database: test
+      uri: mongodb://localhost:27017
+
+  redis:
+    host: localhost
+    port: 11501
+    lettuce:
+      pool:
+        max-idle: 10
+        min-idle: 2
+        max-active: 10
+        max-wait: 2
+
+toast:
+  alimtalk:
+    url: https://api-alimtalk.cloud.toast.com
+    appKey: xxx
+    secretKey: xxx

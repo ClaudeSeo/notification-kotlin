@@ -1,0 +1,9 @@
+server:
+  port: 3000
+  shutdown: graceful
+  error:
+    whitelabel:
+      enabled: false
+
+logging:
+  classpath:log4j2.xml
