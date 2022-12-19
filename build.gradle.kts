@@ -1,4 +1,5 @@
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
 	idea
@@ -66,17 +67,24 @@ subprojects {
   }
 
 	dependencies {
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-		implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-log4j2")
-		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
-		implementation("org.jetbrains.kotlin:kotlin-reflect")
-		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
-    implementation("org.apache.commons:commons-pool2:2.11.1")
+    annotationProcessor(springBoot("spring-boot-configuration-processor"))
+    implementation(springBoot("spring-boot-starter-web"))
+    implementation(springBoot("spring-boot-starter-log4j2"))
 
-		testImplementation("org.springframework.boot:spring-boot-starter-test")
+		implementation(jackson())
+    implementation(commonPool2())
+
+    implementation(kotlinx("kotlinx-coroutines-core"))
+    implementation(kotlinx("kotlinx-coroutines-reactor"))
+    implementation(kotlinxSerialization())
+
+    implementation(kotlin("reflect"))
+    implementation(kotlin("stdlib-jdk8"))
+
+		testImplementation(springBoot("spring-boot-starter-test"))
 	}
+}
+
+tasks.getByName<BootJar>("bootJar") {
+  enabled = false
 }

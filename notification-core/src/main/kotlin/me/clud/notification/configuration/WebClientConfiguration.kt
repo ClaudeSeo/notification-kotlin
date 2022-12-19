@@ -2,6 +2,7 @@ package me.clud.notification.configuration
 
 import io.netty.channel.ChannelOption
 import io.netty.handler.timeout.WriteTimeoutHandler
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -21,6 +22,7 @@ import java.time.Duration
 class WebClientConfiguration {
 
   object KSerializationConfig {
+    @ExperimentalSerializationApi
     val json = Json {
       ignoreUnknownKeys = true
       isLenient = true
@@ -31,6 +33,7 @@ class WebClientConfiguration {
     }
   }
 
+  @ExperimentalSerializationApi
   private fun createRequestFactory(
     connectionTimeout: Duration,
     readTimeout: Duration,
@@ -55,6 +58,7 @@ class WebClientConfiguration {
   }
 
   @Bean
+  @ExperimentalSerializationApi
   fun webClient(): WebClient {
     return createRequestFactory(
       connectionTimeout = Duration.ofMillis(500),

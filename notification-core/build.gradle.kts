@@ -5,11 +5,11 @@ plugins {
 }
 
 dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-data-redis")
-  implementation("org.springframework.boot:spring-boot-starter-webflux")
-  implementation("org.springframework.boot:spring-boot-starter-aop")
-  implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-  implementation("org.springframework.retry:spring-retry")
+  implementation(springBoot("spring-boot-starter-data-redis"))
+  implementation(springBoot("spring-boot-starter-webflux"))
+  implementation(springBoot("spring-boot-starter-aop"))
+  implementation(springBoot("spring-boot-starter-data-mongodb"))
+  implementation(springBootRetry("spring-retry"))
 }
 
 tasks.getByName<BootJar>("bootJar") {
@@ -18,4 +18,5 @@ tasks.getByName<BootJar>("bootJar") {
 
 tasks.getByName<Jar>("jar") {
   enabled = true
+  archiveFileName.set("notification-core.jar")
 }
