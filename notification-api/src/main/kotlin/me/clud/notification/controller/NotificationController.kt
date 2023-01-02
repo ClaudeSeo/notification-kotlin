@@ -1,13 +1,13 @@
 package me.clud.notification.controller
 
+import jakarta.validation.Valid
+import me.clud.notification.application.exception.NotificationException
+import me.clud.notification.domain.notification.entity.Alimtalk
+import me.clud.notification.domain.notification.entity.ServiceType
+import me.clud.notification.domain.notification.port.inbound.SendNotificationUseCase
+import me.clud.notification.domain.user.port.inbound.FindUserUseCase
 import me.clud.notification.dto.alimtalk.SendAlimtalkRequestDto
 import me.clud.notification.dto.alimtalk.SendAlimtalkResponseDto
-import me.clud.notification.exception.NotificationException
-import me.clud.notification.notification.application.port.inbound.SendNotificationUseCase
-import me.clud.notification.notification.domain.Alimtalk
-import me.clud.notification.notification.domain.toast.ServiceType
-import me.clud.notification.user.application.port.inbound.FindUserUseCase
-import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

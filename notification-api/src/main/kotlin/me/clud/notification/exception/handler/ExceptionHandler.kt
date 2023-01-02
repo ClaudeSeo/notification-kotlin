@@ -1,8 +1,9 @@
 package me.clud.notification.exception.handler
 
-import me.clud.notification.exception.NotificationException
-import me.clud.notification.toKST
 import jakarta.servlet.http.HttpServletRequest
+import me.clud.notification.application.exception.NotificationException
+import me.clud.notification.logger
+import me.clud.notification.toKST
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
@@ -35,23 +36,30 @@ data class ErrorResponseMessage(
   val timestamp: String,
 )
 
-fun createErrorResponse(exceptionResponse: ExceptionResponse): ResponseEntity<ErrorResponseMessage> {
-  return ResponseEntity(
-    ErrorResponseMessage(
-      error = ErrorResponse(
-        message = exceptionResponse.message,
-        status = exceptionResponse.status.reasonPhrase,
-        cause = exceptionResponse.cause
-      ),
-      path = exceptionResponse.path,
-      timestamp = exceptionResponse.timestamp
-    ),
-    exceptionResponse.status
-  )
-}
-
 @RestControllerAdvice
 class ExceptionHandler {
+  private val logger = logger()
+
+  private fun createErrorResponse(
+    exceptionResponse: ExceptionResponse,
+    e: Throwable? = null
+  ): ResponseEntity<ErrorResponseMessage> {
+    e?.let { logger.error(e.message, e) }
+
+    return ResponseEntity(
+      ErrorResponseMessage(
+        error = ErrorResponse(
+          message = exceptionResponse.message,
+          status = exceptionResponse.status.reasonPhrase,
+          cause = exceptionResponse.cause
+        ),
+        path = exceptionResponse.path,
+        timestamp = exceptionResponse.timestamp
+      ),
+      exceptionResponse.status
+    )
+  }
+
   @ExceptionHandler(value = [NotificationException::class])
   fun handleDomainException(
     e: NotificationException,
@@ -63,7 +71,8 @@ class ExceptionHandler {
       status = e.statusCode,
       cause = e.cause,
       path = httpServletRequest.requestURI,
-    )
+    ),
+    e
   )
 
   @ExceptionHandler(value = [BindException::class])
@@ -103,6 +112,7 @@ class ExceptionHandler {
       status = HttpStatus.INTERNAL_SERVER_ERROR,
       cause = e.cause,
       path = httpServletRequest.requestURI,
-    )
+    ),
+    e
   )
 }

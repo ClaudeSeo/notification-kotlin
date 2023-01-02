@@ -11,11 +11,9 @@
       <PatternLayout pattern="${consoleLayout}"/>
     </Console>
 
-    <!-- log 파일을 저장하는 위치와 정책 -->
     <RollingFile name="file">
       <FileName>logs/${logFileName}.log</FileName>
       <FilePattern>logs/${logFileName}.%d{yyyy-MM-dd-hh}.log</FilePattern>
-<!--      <PatternLayout pattern="${fileLayout}"/>-->
       <JSONLayout complete="false" compact="true" eventEol="true" properties="true" locationInfo="true" objectMessageAsJsonObject="true" />
       <Policies>
         <TimeBasedTriggeringPolicy interval="1" modulate="true" />

@@ -11,4 +11,6 @@ fun DependencyHandlerScope.springBoot(module: String) = "org.springframework.boo
 
 fun DependencyHandlerScope.springBootRetry(module: String) = "org.springframework.retry:$module"
 
+fun DependencyHandlerScope.springKafka() = "org.springframework.kafka:spring-kafka"
+
 fun DependencyHandlerScope.jackson () = "com.fasterxml.jackson.module:jackson-module-kotlin:${Version.jackson}"

@@ -1,9 +1,9 @@
 package me.clud.notification.dto.alimtalk
 
-import me.clud.notification.annotation.ValueOfEnum
-import me.clud.notification.notification.domain.toast.ServiceType
 import jakarta.validation.constraints.Future
 import jakarta.validation.constraints.NotBlank
+import me.clud.notification.annotation.ValueOfEnum
+import me.clud.notification.domain.notification.entity.ServiceType
 import java.time.OffsetDateTime
 
 data class SendAlimtalkRequestDto(

@@ -16,7 +16,8 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import org.springframework.web.util.ContentCachingRequestWrapper
 import org.springframework.web.util.ContentCachingResponseWrapper
-import java.util.*
+import java.util.TreeMap
+import java.util.UUID
 
 @Component
 class LoggingFilter : OncePerRequestFilter() {

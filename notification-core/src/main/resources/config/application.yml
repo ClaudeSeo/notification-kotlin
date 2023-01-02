@@ -1,12 +1,21 @@
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+
 spring:
   data:
     mongodb:
-      database: test
-      uri: mongodb://localhost:27017
+      database: ${DATABASE_NAME:db}
+      uri: ${DATABASE_URI:mongodb://admin:admin@localhost:27017/?authSource=db}
 
   redis:
-    host: localhost
-    port: 11501
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
     lettuce:
       pool:
         max-idle: 10
@@ -16,6 +25,10 @@ spring:
 
 toast:
   alimtalk:
-    url: https://api-alimtalk.cloud.toast.com
+    url: https://f63a7387-2ff7-47f4-b081-33cfa945fed7.mock.pstmn.io
     appKey: xxx
     secretKey: xxx
+
+kafka:
+  brokers:
+    bootstrap: ${KAFKA_BROKERS:127.0.0.1:19092}

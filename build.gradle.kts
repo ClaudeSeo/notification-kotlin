@@ -70,6 +70,7 @@ subprojects {
     annotationProcessor(springBoot("spring-boot-configuration-processor"))
     implementation(springBoot("spring-boot-starter-web"))
     implementation(springBoot("spring-boot-starter-log4j2"))
+    implementation(springKafka())
 
 		implementation(jackson())
     implementation(commonPool2())
